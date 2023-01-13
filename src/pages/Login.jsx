@@ -32,7 +32,7 @@ const Login = () => {
   };
 
   const { email, password } = formData;
-  const naviagate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { user, isLoading, isError, message, isSuccess } = useSelector(
@@ -41,10 +41,10 @@ const Login = () => {
   useEffect(() => {
     if (isError) toast.error(message);
 
-    if (isSuccess || user) naviagate("/");
+    if (isSuccess || user) navigate("/");
 
     dispatch(reset());
-  }, [user, isError, message, isSuccess, naviagate, dispatch]);
+  }, [user, isError, message, isSuccess, navigate, dispatch]);
 
   if (isLoading) return <Spinner />;
   return (

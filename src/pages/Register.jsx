@@ -23,21 +23,12 @@ const Register = () => {
     }));
   };
 
-  useEffect(() => {
-    if (isError) toast.error(message);
-
-    if (isSuccess || user) naviagate("/");
-
-    dispatch(reset());
-  }, [user, isError, message, isSuccess, naviagate, dispatch]);
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (password !== confirmPassword) toast.error("Passwords do not match");
-    else {
-      const userData = { name, email, password };
-      dispatch(register(userData));
-    }
+    // if (password !== confirmPassword) toast.error("Passwords do not match");
+
+    const userData = { name, email, password };
+    dispatch(register(userData));
   };
 
   const { name, email, password, confirmPassword } = formData;
@@ -48,7 +39,13 @@ const Register = () => {
   const { user, isLoading, isError, message, isSuccess } = useSelector(
     (state) => state.auth
   );
+  useEffect(() => {
+    if (isError) toast.error(message);
 
+    if (isSuccess || user) naviagate("/");
+
+    dispatch(reset());
+  }, [user, isError, message, isSuccess, naviagate, dispatch]);
   if (isLoading) return <Spinner />;
 
   return (
@@ -95,7 +92,7 @@ const Register = () => {
             />
           </div>
           <div className="form-group">
-            <input
+            {/* <input
               type="password"
               className="form-control"
               id="confirmPassoword"
@@ -103,7 +100,7 @@ const Register = () => {
               value={confirmPassword}
               placeholder="Confirm Password"
               onChange={handleChange}
-            />
+            /> */}
           </div>
           <div className="form-group">
             <button type="submit" className="btn btn-block">

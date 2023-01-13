@@ -17,9 +17,11 @@ const Dashboard = () => {
   useEffect(() => {
     if (isError) console.error(message);
 
-    if (!user) navigate("/login");
-
-    dispatch(getGoals());
+    if (!user) {
+      navigate("/login");
+    } else {
+      dispatch(getGoals());
+    }
 
     return () => {
       dispatch(reset());
@@ -27,7 +29,6 @@ const Dashboard = () => {
   }, [user, navigate, isError, dispatch]);
 
   if (isLoading) return <Spinner />;
-  console.log(goals, "jj");
   return (
     <>
       <section className="heading">
